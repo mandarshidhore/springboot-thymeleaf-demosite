@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans|Roboto+Condensed|Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Trip Services Demo Site</title>
+  </head>
+
+  <!-- <body style="background-color: #69696b"> -->
+
+  <body style="background-color: #606296; font-family: 'Roboto Condensed', serif;">
+    <header class="p-2 mt-4" style="background-color: #F4F4F2; color: #606296;">
+      <h1 class="display-4 text-center align-top">Trip Services Demosite</h1>
+    </header>
+
+    <!-- <div class="container" style="border:1px solid #fff; border-radius:0 0 5px 5px; background-color: #D17C5A"> -->
+    <div class="container p-2" style="border-radius:0 0 5px 5px; background-color: #F39E7F">
+      <form action="#" th:action="@{/search}" th:object="${searchQuery}" method="POST">
+        <div class="row justify-content-center p-3">
+          <button class="btn text-dark col-3 col-sm-3 col-md-2 border rounded text-center p-2" type="button" id="searchCardShow" style="background-color: #F4F4F2; font-family: 'Roboto Slab', serif;">
+            <span>
+              Search&nbsp;&nbsp;<i class="fas fa-search fa-xs"></i>
+            </span>
+          </button>
+        </div>
+
+        <div class="card mb-3" id="searchCard">
+          <div class="card-header">
+            Criteria
+          </div>
+          <div class="card-body">
+            <p class="card-text">Please input below</p>
+            <!-- origin -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-plane-departure"></i>
+                </span>
+              </div>
+              <input class="form-control text-uppercase" type="text" placeholder="origin" th:field="*{origin}" >
+            </div>
+            <!-- destination -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-plane-arrival"></i>
+                </span>
+              </div>
+              <input class="form-control text-uppercase" type="text" placeholder="destination" th:field="*{destination}" >
+            </div>
+            <!-- passengers -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-user-friends"></i>
+                </span>
+              </div>
+              <input class="form-control" type="text" placeholder="ADT">
+              <input class="form-control" type="text" placeholder="SRC">
+              <input class="form-control" type="text" placeholder="CHD">
+              <input class="form-control" type="text" placeholder="INF">
+            </div>
+            <!-- departure date -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-calendar-alt fa-lg"></i>
+                </span>
+                <span class="input-group-text text-center" style="width: 88px;">
+                  Departure
+                </span>
+              </div>
+              <input class="form-control text-uppercase text-muted" type="date">
+            </div>
+            <!-- arrival date -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-calendar-alt fa-lg"></i>
+                </span>
+                <span class="input-group-text text-center" style="width: 88px;">
+                  &nbsp;&nbsp;&nbsp;Arrival
+                </span>
+              </div>
+              <input class="form-control text-uppercase text-muted" type="date">
+            </div>
+            <input class="btn btn-info btn-block" type="submit" value="Search">
+            <!-- <a class="btn btn-info btn-block" href="#">Go</a> -->
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <br>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js " integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin=" anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js " integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js " integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy " crossorigin="anonymous "></script>
+
+    <script>
+      $(document).ready(function () {
+        console.log("ready! ");
+        $('#searchCard').show()
+      });
+
+      // get current year
+      $("#year ").text(new Date().getFullYear());
+
+      $('#searchCardShow').click(function () {
+        console.log("click ");
+        $('#searchCard').toggle()
+      });
+    </script>
+  </body>
+
+</html>
